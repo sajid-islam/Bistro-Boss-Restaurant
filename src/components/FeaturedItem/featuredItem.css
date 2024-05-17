@@ -1,0 +1,8 @@
+.featured-item{
+    background-color: #151515B3;
+    background-image: linear-gradient(to right, #151515B3,#151515B3),url('../../assets/home/featured.jpg');
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 40px;
+}
