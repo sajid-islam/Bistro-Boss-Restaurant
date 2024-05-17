@@ -1,0 +1,9 @@
+.carousel .thumb img{
+    width: 100% !important;
+    height: 100% !important
+}
+.carousel .slide img{
+    width: 100%;
+    max-height: 620px;
+    object-fit: cover;
+}
