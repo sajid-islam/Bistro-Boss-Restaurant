@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import SectionTitle from "../../SectionTitle/SectionTitle";
+import SectionTitle from "../SectionTitle/SectionTitle";
 import axios from 'axios'
-import MenuCard from "../../MenuCard/MenuCard";
+import MenuCard from "../MenuCard/MenuCard";
 const PopularItem = () => {
 
     const {data:items,isPending}=useQuery({
