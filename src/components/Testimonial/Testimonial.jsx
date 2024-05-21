@@ -17,7 +17,6 @@ const Testimonial = () => {
             return res.data
         }
     })
-    console.log(reviews);
     if (isPending) {
         return <div className="flex justify-center items-center w-full h-screen">
             <span className="loading loading-spinner loading-lg"></span>

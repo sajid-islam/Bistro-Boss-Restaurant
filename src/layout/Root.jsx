@@ -4,7 +4,6 @@ import Footer from "../components/Footer/Footer";
 
 const Root = () => {
     const {pathname} = useLocation()
-    console.log(pathname);
     return (
         <div>
             {

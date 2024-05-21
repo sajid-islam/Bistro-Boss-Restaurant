@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types'
 const MenuCard = ({item}) => {
     return (
-        <div className='flex gap-6 '>
-            <div>
-                <img className='w-[118px] h-10 md:h-24 object-cover rounded-tr-[200px] rounded-b-[200px]' src={item.image} alt="" />
+        <div className='grid grid-cols-5 gap-6 '>
+            <div className=''>
+                <img className='w-[110px] h-10 md:h-24 object-cover rounded-tr-[200px] rounded-b-[200px]' src={item.image} alt="" />
             </div>
-            <div className='space-y-3'>
+            <div className='space-y-3 col-span-3'>
                 <h5 className="md:text-xl font-cinzel uppercase text-[#151515]">{item.name}</h5>
                 <p className="text-[#737373] text-xs md:text-[14px] ">{item.recipe}</p>
             </div>
