@@ -5,6 +5,7 @@ import {
 import Home from '../pages/Home';
 import OurMenu from '../pages/OurMenu';
 import OurShop from '../pages/OurShop';
+import Login from '../pages/Login';
 
   const router = createBrowserRouter([
         {
@@ -22,6 +23,10 @@ import OurShop from '../pages/OurShop';
                 {
                     path:'/our-shop/:categoryId',
                     element:<OurShop/>
+                },
+                {
+                    path:'/login',
+                    element:<Login/>
                 }
             ]
         }

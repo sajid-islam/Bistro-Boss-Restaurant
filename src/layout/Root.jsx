@@ -10,7 +10,9 @@ const Root = () => {
                 pathname === '/login' || pathname === '/register' ? '':<Navbar/>
             }
             <Outlet/>
-            <Footer/>
+            {
+                pathname === '/login' || pathname === '/register' ? '':<Footer/>
+            }
         </div>
     );
 };
