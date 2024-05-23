@@ -3,10 +3,10 @@ import './navbar.css'
 const Navbar = () => {
     const navLink = <>
         <li><NavLink to={'/'}>Home</NavLink></li>
-        <li><NavLink to={'/contactUs'}>Contact Us</NavLink></li>
+        <li><NavLink to={'/contact-us'}>Contact Us</NavLink></li>
         <li><NavLink to={'/dashboard'}>Dashboard</NavLink></li>
         <li><NavLink to={'/our-menu'}>Our Menu</NavLink></li>
-        <li><NavLink to={'/ourShop'}>Our Shop</NavLink></li>
+        <li><NavLink to={'/our-shop/0'}>Our Shop</NavLink></li>
 
     </>
     return (

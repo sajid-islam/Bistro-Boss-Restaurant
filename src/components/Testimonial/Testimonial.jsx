@@ -13,7 +13,7 @@ const Testimonial = () => {
     const { data: reviews, isPending } = useQuery({
         queryKey: ['reviews'],
         queryFn: async () => {
-            const res = await axios('/reviews.json')
+            const res = await axios('http://localhost:3000/reviews')
             return res.data
         }
     })
@@ -38,7 +38,7 @@ const Testimonial = () => {
                     className="mySwiper"
                 >
                     {
-                        reviews.map(review => <SwiperSlide key={review._id}>
+                        reviews.map((review) => <SwiperSlide key={review._id}>
                             <div className="flex flex-col text-center space-y-3 items-center py-5">
                                 <div>
                                     <Rating

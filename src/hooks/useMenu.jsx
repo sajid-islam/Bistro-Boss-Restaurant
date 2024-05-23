@@ -5,7 +5,7 @@ const useMenu = () => {
     const { data: items, isPending } = useQuery({
         queryKey: ['menu'],
         queryFn: async () => {
-            const res = await axios('menu.json')
+            const res = await axios('http://localhost:3000/menu')
             return res.data
         }
     })

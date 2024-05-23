@@ -7,11 +7,10 @@ const PopularItem = () => {
         return 'loading....'
     }
     const popular = items.filter(item => item.category === 'popular')
-    console.log(popular);
     return (
         <section>
             <SectionTitle subHeading={'Popular Item'} heading={"from our menu"} />
-            <MenuCategory items={popular}  btnTxt={'View full menu'}/>
+            <MenuCategory items={popular} id={0}  btnTxt={'View full menu'}/>
         </section>
     );
 };
