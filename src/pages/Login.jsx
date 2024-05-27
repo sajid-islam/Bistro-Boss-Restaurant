@@ -1,11 +1,53 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import bg from "../assets/others/authentication2.png"
 import { CiFacebook } from "react-icons/ci";
 import { FaGoogle } from "react-icons/fa";
 import { VscGithub } from "react-icons/vsc";
-
+import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
+import { useEffect, useState } from "react";
+import useAuth from "../hooks/useAuth";
+import toast from "react-hot-toast";
 
 const Login = () => {
+    const location = useLocation()
+    const navigate = useNavigate()
+    const {login}=useAuth()
+    const [disabled,setDisabled]=useState(true)
+    const from = location.state?.from?.pathname || '/'
+
+    useEffect(() => {
+        loadCaptchaEnginge(6,'black','white')
+    }, [])
+
+    //Login
+    const handleLogin = (e) => {
+        e.preventDefault()
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        login(email,password)
+        .then(result=>{
+            if(result.user){
+                toast.success('Login Successfully')
+                navigate(from)
+            }
+        })
+        .catch(error=>{
+            console.log(error);
+            toast.error(error.message)
+        })
+    }
+
+    // Captcha Validation
+    const handleValidateCaptcha=(e)=>{
+        const user_captcha_value= e.target.value;
+        if(validateCaptcha(user_captcha_value)){
+            setDisabled(false)
+        }
+        else{
+            setDisabled(true)
+        }
+    }
     return (
         <div className={`bg-[url('https://i.postimg.cc/FsFpLC2B/authentication.png')]  w-full lg:px-32 px-5 md:px-12 py-10`}>
             <div className="bg-[url('https://i.postimg.cc/FsFpLC2B/authentication.png')] w-full  shadow-2xl flex justify-center items-cen md:px-10">
@@ -16,34 +58,33 @@ const Login = () => {
                             <img src={bg} alt="" />
                         </div>
                         <div className="card shrink-0 w-full max-w-sm  mx-auto ">
-                            <form className="card-body">
+                            <h1 className="text-3xl font-bold text-center md:hidden">Register now!</h1>
+                            <form onSubmit={handleLogin} className="card-body">
                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text">Email</span>
                                     </label>
-                                    <input type="email" placeholder="email" className="input input-bordered" required />
+                                    <input type="email" name="email" placeholder="email" className="input input-bordered" required />
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text">Password</span>
                                     </label>
-                                    <input type="password" placeholder="password" className="input input-bordered" required />
+                                    <input type="password" name="password" placeholder="password" className="input input-bordered" required />
                                 </div>
                                 <div className="form-control mt-5">
-                                    <input type="text" placeholder="" className="input input-bordered" required />
-                                    <label className="label">
-                                        <a href="#" className="text-xs font-semibold  text-[#5D5FEF]">Reload Captcha</a>
+                                    <label className="label w-full">
+                                        <LoadCanvasTemplate />
                                     </label>
+                                    <input onBlur={handleValidateCaptcha} type="text" name="captcha" placeholder="Type the captcha" className="input input-bordered" required />
                                 </div>
-                                <div className="form-control">
-                                    <input type="text" placeholder="Type here" className="input input-bordered" required />
-                                </div>
+
                                 <div className="form-control mt-6">
-                                    <button className="btn bg-[#D1A054B3] hover:bg-[#D1A054B3] text-white">Login</button>
+                                    <button disabled={disabled} className="btn bg-[#D1A054B3] hover:bg-[#D1A054B3] text-white">Login</button>
                                 </div>
                             </form>
                             <div className="text-center space-y-3">
-                                <p className="text-[#D1A054] font-semibold">New here? <Link>Create a new account</Link></p>
+                                <p className="text-[#D1A054] font-semibold">New here? <Link to={'/register'} className=" hover:underline">Create a new account</Link></p>
                                 <p className="text-[#444444] text-xs font-bold">Or Login with</p>
                                 <div className="flex justify-center gap-4">
                                     <button><CiFacebook size={35} /></button>

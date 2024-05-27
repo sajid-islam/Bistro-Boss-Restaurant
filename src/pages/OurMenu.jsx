@@ -8,8 +8,12 @@ import dessertImg from '../assets/menu/dessert-bg.jpeg'
 import pizzaImg from '../assets/menu/pizza-bg.jpg'
 import saladImg from '../assets/menu/pizza-bg.jpg'
 import soupImg from '../assets/menu/soup-bg.jpg'
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthProvider";
 
 const OurMenu = () => {
+    const {me}=useContext(AuthContext)
+    console.log(me);
     const {items,isPending}=useMenu()
     if(isPending){
         return 'loading...'

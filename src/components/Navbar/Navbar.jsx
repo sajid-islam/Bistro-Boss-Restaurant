@@ -1,14 +1,36 @@
 import { Link, NavLink } from "react-router-dom";
 import './navbar.css'
+import useAuth from './../../hooks/useAuth';
+import { toast } from 'react-hot-toast';
+import { TiShoppingCart } from "react-icons/ti";
+
 const Navbar = () => {
+    const { user, logout } = useAuth()
     const navLink = <>
         <li><NavLink to={'/'}>Home</NavLink></li>
         <li><NavLink to={'/contact-us'}>Contact Us</NavLink></li>
         <li><NavLink to={'/dashboard'}>Dashboard</NavLink></li>
         <li><NavLink to={'/our-menu'}>Our Menu</NavLink></li>
         <li><NavLink to={'/our-shop/0'}>Our Shop</NavLink></li>
+        <li><NavLink to={'/cart'}>
+            <button className="flex">
+                <TiShoppingCart size={30} />
+                <div className="relative right-3 bottom-2 bg-[#BB8506] rounded-full text-xs p-1">0</div>
+            </button>
+        </NavLink></li>
 
     </>
+
+    const handleLogout = () => {
+        logout()
+            .then(() => {
+                toast.success('Logout Successfully')
+            })
+            .catch(error => {
+                console.log(error);
+                toast.error(error.message)
+            })
+    }
     return (
         <div className="navbar md:px-10 bg-black/30 fixed z-10 text-white">
             <div className="navbar-start">
@@ -28,7 +50,19 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="flex justify-end w-full md:w-auto md:ml-2">
-                <Link to={'/login'} className="btn bg-[#111827] hover:bg-[#111827] text-[#BB8506]">Login</Link>
+                {
+                    user ?
+                        <Link onClick={handleLogout}
+                            className="btn bg-[#111827] hover:bg-[#111827] text-[#BB8506] border-0">
+                            Logout
+                        </Link> :
+                        <Link to={'/login'}
+                            className="btn bg-[#111827] hover:bg-[#111827] text-[#BB8506] border-0">
+                            Login
+                        </Link>
+
+
+                }
             </div>
         </div>
     );
