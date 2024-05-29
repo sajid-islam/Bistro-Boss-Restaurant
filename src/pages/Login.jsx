@@ -7,6 +7,7 @@ import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-s
 import { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
     const location = useLocation()
@@ -33,7 +34,7 @@ const Login = () => {
             }
         })
         .catch(error=>{
-            console.log(error);
+            console.error(error);
             toast.error(error.message)
         })
     }
@@ -50,6 +51,9 @@ const Login = () => {
     }
     return (
         <div className={`bg-[url('https://i.postimg.cc/FsFpLC2B/authentication.png')]  w-full lg:px-32 px-5 md:px-12 py-10`}>
+            <Helmet>
+                <title>Login | Bistro Boss</title>
+            </Helmet>
             <div className="bg-[url('https://i.postimg.cc/FsFpLC2B/authentication.png')] w-full  shadow-2xl flex justify-center items-cen md:px-10">
                 <div className="hero">
                     <div className="hero-content grid grid-cols-1 md:grid-cols-2 ">

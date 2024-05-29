@@ -3,19 +3,21 @@ import './navbar.css'
 import useAuth from './../../hooks/useAuth';
 import { toast } from 'react-hot-toast';
 import { TiShoppingCart } from "react-icons/ti";
+import useItemCart from "../../hooks/useItemCart";
 
 const Navbar = () => {
     const { user, logout } = useAuth()
+    const{cartItem}=useItemCart()
     const navLink = <>
         <li><NavLink to={'/'}>Home</NavLink></li>
         <li><NavLink to={'/contact-us'}>Contact Us</NavLink></li>
         <li><NavLink to={'/dashboard'}>Dashboard</NavLink></li>
         <li><NavLink to={'/our-menu'}>Our Menu</NavLink></li>
         <li><NavLink to={'/our-shop/0'}>Our Shop</NavLink></li>
-        <li><NavLink to={'/cart'}>
+        <li><NavLink to={'/dashboard/cart'}>
             <button className="flex">
                 <TiShoppingCart size={30} />
-                <div className="relative right-3 bottom-2 bg-[#BB8506] rounded-full text-xs p-1">0</div>
+                <div className="relative right-3 bottom-2 bg-[#BB8506] rounded-full text-xs p-1">{cartItem.length}</div>
             </button>
         </NavLink></li>
 

@@ -1,0 +1,9 @@
+a.active{
+    color: white;
+    background-color: transparent;
+}
+ul a{
+    display: flex;
+    gap: 5px;
+    margin: 12px;
+}
