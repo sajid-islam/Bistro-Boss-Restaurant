@@ -1,23 +1,21 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import bg from "../assets/others/authentication2.png"
-import { CiFacebook } from "react-icons/ci";
-import { FaGoogle } from "react-icons/fa";
-import { VscGithub } from "react-icons/vsc";
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { useEffect, useState } from "react";
 import useAuth from "../hooks/useAuth";
 import toast from "react-hot-toast";
 import { Helmet } from "react-helmet-async";
+import SocialLogin from "../components/SocialLogin/SocialLogin";
 
 const Login = () => {
     const location = useLocation()
     const navigate = useNavigate()
-    const {login}=useAuth()
-    const [disabled,setDisabled]=useState(true)
+    const { login } = useAuth()
+    const [disabled, setDisabled] = useState(true)
     const from = location.state?.from?.pathname || '/'
 
     useEffect(() => {
-        loadCaptchaEnginge(6,'black','white')
+        loadCaptchaEnginge(6, 'black', 'white')
     }, [])
 
     //Login
@@ -26,26 +24,26 @@ const Login = () => {
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
-        login(email,password)
-        .then(result=>{
-            if(result.user){
-                toast.success('Login Successfully')
-                navigate(from)
-            }
-        })
-        .catch(error=>{
-            console.error(error);
-            toast.error(error.message)
-        })
+        login(email, password)
+            .then(result => {
+                if (result.user) {
+                    toast.success('Login Successfully')
+                    navigate(from)
+                }
+            })
+            .catch(error => {
+                console.error(error);
+                toast.error(error.message)
+            })
     }
 
     // Captcha Validation
-    const handleValidateCaptcha=(e)=>{
-        const user_captcha_value= e.target.value;
-        if(validateCaptcha(user_captcha_value)){
+    const handleValidateCaptcha = (e) => {
+        const user_captcha_value = e.target.value;
+        if (validateCaptcha(user_captcha_value)) {
             setDisabled(false)
         }
-        else{
+        else {
             setDisabled(true)
         }
     }
@@ -89,12 +87,8 @@ const Login = () => {
                             </form>
                             <div className="text-center space-y-3">
                                 <p className="text-[#D1A054] font-semibold">New here? <Link to={'/register'} className=" hover:underline">Create a new account</Link></p>
-                                <p className="text-[#444444] text-xs font-bold">Or Login with</p>
-                                <div className="flex justify-center gap-4">
-                                    <button><CiFacebook size={35} /></button>
-                                    <button className="border-2 border-black rounded-full px-[7px]"><FaGoogle /></button>
-                                    <button><VscGithub size={30} /></button>
-                                </div>
+                                <div className="divider text-[#444444] text-xs font-bold">Or sing in with</div>
+                                <SocialLogin />
                             </div>
                         </div>
                     </div>

@@ -1,13 +1,15 @@
-import { CiFacebook } from "react-icons/ci";
-import { FaGoogle } from "react-icons/fa";
-import { VscGithub } from "react-icons/vsc";
 import { Link, useNavigate } from "react-router-dom";
 import bg from "../assets/others/authentication2.png"
 import useAuth from "../hooks/useAuth";
 import toast from "react-hot-toast";
 import { useForm } from "react-hook-form"
+import useAxiosPublic from "../hooks/useAxiosPublic";
+import { updateProfile } from "firebase/auth";
+import { Helmet } from "react-helmet-async";
+import SocialLogin from "../components/SocialLogin/SocialLogin";
 
 const Register = () => {
+    const axiosPublic = useAxiosPublic()
     const {
         register,
         handleSubmit,
@@ -22,6 +24,18 @@ const Register = () => {
         createUser(data.email, data.password)
                 .then(result => {
                     if (result.user) {
+                        updateProfile(result.user,{displayName:data.name,photoURL:data.photoURL})
+                        //create user in database
+                        const userInfo = {
+                            name:data.name,
+                            email:data.email
+                        }
+                        axiosPublic.post('/users',userInfo)
+                        .then(res=>{
+                            console.log(res.data);
+                        })
+
+                        //set user profile
                         toast.success('Register Successfully')
                         navigate('/')
                     }
@@ -34,6 +48,9 @@ const Register = () => {
     return (
         <div className={`bg-[url('https://i.postimg.cc/FsFpLC2B/authentication.png')]  w-full lg:px-32 px-5 md:px-12 py-10`}>
             <div className="bg-[url('https://i.postimg.cc/FsFpLC2B/authentication.png')] w-full  shadow-2xl flex justify-center items-cen md:px-10">
+                <Helmet>
+                    <title>Register | Bistro Boss</title>
+                </Helmet>
                 <div className="hero">
                     <div className="hero-content flex-row-reverse">
                         <div className="text-center lg:text-left hidden md:block">
@@ -74,7 +91,7 @@ const Register = () => {
                                     <label className="label">
                                         <span className="label-text">Password</span>
                                     </label>
-                                    <input type="text" {...register('password', {
+                                    <input type="password" {...register('password', {
                                         required: true,
                                         minLength: 5,
                                         maxLength: 20,
@@ -92,12 +109,8 @@ const Register = () => {
                             </form>
                             <div className="text-center space-y-3">
                                 <p className="text-[#D1A054] font-semibold">Already registered? <Link to={'/login'} className="hover:underline">Go to login</Link></p>
-                                <p className="text-[#444444] text-xs font-bold">Or sing up with</p>
-                                <div className="flex justify-center gap-4">
-                                    <button><CiFacebook size={35} /></button>
-                                    <button className="border-2 border-black rounded-full px-[7px]"><FaGoogle /></button>
-                                    <button><VscGithub size={30} /></button>
-                                </div>
+                                <div className="divider text-[#444444] text-xs font-bold">Or sing up with</div>
+                                <SocialLogin/>
                             </div>
                         </div>
                     </div>

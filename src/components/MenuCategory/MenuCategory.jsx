@@ -12,7 +12,7 @@ const MenuCategory = ({ items, btnTxt, title, img, description ,id }) => {
                 }
             </div>
             <div className="flex justify-center mb-10">
-                <Link to={`/our-shop/${id}`}>
+                <Link to={`/ourShop/${id}`}>
                     <button className="btn bg-transparent border-0 border-b-2 border-[#151515] uppercase">{btnTxt}</button>
                 </Link>
             </div>

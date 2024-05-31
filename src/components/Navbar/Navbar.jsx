@@ -1,20 +1,20 @@
 import { Link, NavLink } from "react-router-dom";
-import './navbar.css'
 import useAuth from './../../hooks/useAuth';
 import { toast } from 'react-hot-toast';
 import { TiShoppingCart } from "react-icons/ti";
 import useItemCart from "../../hooks/useItemCart";
+import './navbar.css'
 
 const Navbar = () => {
     const { user, logout } = useAuth()
-    const{cartItem}=useItemCart()
+    const { cartItem } = useItemCart()
     const navLink = <>
-        <li><NavLink to={'/'}>Home</NavLink></li>
-        <li><NavLink to={'/contact-us'}>Contact Us</NavLink></li>
-        <li><NavLink to={'/dashboard'}>Dashboard</NavLink></li>
-        <li><NavLink to={'/our-menu'}>Our Menu</NavLink></li>
-        <li><NavLink to={'/our-shop/0'}>Our Shop</NavLink></li>
-        <li><NavLink to={'/dashboard/cart'}>
+        <li><NavLink className="nav-link" to={'/'}>Home</NavLink></li>
+        <li><NavLink className="nav-link" to={'/contact-us'}>Contact Us</NavLink></li>
+        <li><NavLink className="nav-link" to={'/dashboard'}>Dashboard</NavLink></li>
+        <li><NavLink className="nav-link" to={'/ourMenu'}>Our Menu</NavLink></li>
+        <li><NavLink className="nav-link" to={'/ourShop/0'}>Our Shop</NavLink></li>
+        <li><NavLink className="nav-link" to={'/dashboard/cart'}>
             <button className="flex">
                 <TiShoppingCart size={30} />
                 <div className="relative right-3 bottom-2 bg-[#BB8506] rounded-full text-xs p-1">{cartItem.length}</div>
@@ -47,17 +47,24 @@ const Navbar = () => {
                 <a className="font-cinzel text-xs md:text-xl  font-bold">Bistro Boss <br /> <span className="md:text-[14px] tracking-[5px] text-xs">Restaurant</span></a>
             </div>
             <div className="navbar-end hidden lg:flex">
-                <ul className="flex gap-4 font-medium px-1">
+                <ul className="flex font-medium px-1">
                     {navLink}
                 </ul>
             </div>
             <div className="flex justify-end w-full md:w-auto md:ml-2">
                 {
                     user ?
-                        <Link onClick={handleLogout}
-                            className="btn bg-[#111827] hover:bg-[#111827] text-[#BB8506] border-0">
-                            Logout
-                        </Link> :
+                        <div className="flex gap-5 items-center">
+                            <Link onClick={handleLogout}
+                                className="btn bg-[#111827] hover:bg-[#111827] text-[#BB8506] border-0">
+                                Logout
+                            </Link>
+                            <div className="avatar">
+                                <div className="w-10 h-10 rounded-full ring ring-[#BB8506] ring-offset-base-100 ring-offset-2">
+                                    <img src={user.photoURL} />
+                                </div>
+                            </div>
+                        </div> :
                         <Link to={'/login'}
                             className="btn bg-[#111827] hover:bg-[#111827] text-[#BB8506] border-0">
                             Login

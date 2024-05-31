@@ -1,16 +1,26 @@
 import { NavLink, Outlet } from "react-router-dom";
 import { IoMenu } from "react-icons/io5";
 import { IoHome } from "react-icons/io5";
-import { FaCalendarAlt } from "react-icons/fa";
+import { FaBook, FaCalendarAlt, FaList } from "react-icons/fa";
 import { IoIosWallet } from "react-icons/io";
 import { FaShoppingCart } from "react-icons/fa";
 import { FaStarHalfStroke } from "react-icons/fa6";
 import { FaCalendarCheck } from "react-icons/fa";
 import { MdShoppingBag } from "react-icons/md";
 import { MdEmail } from "react-icons/md";
+import { GiForkKnifeSpoon } from "react-icons/gi";
+import { HiUserGroup } from "react-icons/hi2";
 import '../Dashboard/dashboard.css'
+import useAdmin from "../../hooks/useAdmin";
+import useAuth from "../../hooks/useAuth";
 
 const Dashboard = () => {
+
+    const {loading} = useAuth()
+    const {isAdmin,isPending} = useAdmin();
+    if( loading){
+        return 'loading'
+    }
     return (
         <div className="lg:flex ">
             <div>
@@ -31,17 +41,34 @@ const Dashboard = () => {
                             <p className="font-cinzel text-xs md:text-xl  font-extrabold mb-5">Bistro Boss <br /> <span className="md:text-[14px] tracking-[5px] text-xs ">Restaurant</span></p>
 
                             {/* Sidebar content here */}
-                            <li><NavLink to="/dashboard/user-home"><IoHome size={20}/>User Home</NavLink></li>
-                            <li><NavLink to="/dashboard/reservation"><FaCalendarAlt size={20}/>Reservation</NavLink></li>
-                            <li><NavLink to="/dashboard/reservation"><IoIosWallet size={20}/>Payment History</NavLink></li>
-                            <li><NavLink to="/dashboard/cart"><FaShoppingCart size={20}/>My Cart</NavLink></li>
-                            <li><NavLink to="/dashboard/reservation"><FaStarHalfStroke size={20}/>Add Review</NavLink></li>
-                            <li><NavLink to="/dashboard/reservation"><FaCalendarCheck size={20}/>My Booking</NavLink></li>
-                            <hr  className="my-5 border-gray-400"/>
-                            <li><NavLink to="/"><IoHome size={20}/>Home</NavLink></li>
-                            <li><NavLink to="/dashboard/reservation"><IoMenu size={20}/>Menu</NavLink></li>
-                            <li><NavLink to="/dashboard/reservation"><MdShoppingBag size={20}/>Shop</NavLink></li>
-                            <li><NavLink to="/dashboard/reservation"><MdEmail size={20}/>Contact</NavLink></li>
+                            {
+                                isAdmin ?
+                                // Admin content
+                                    <>
+                                        <li><NavLink to="/dashboard/adminHome"><IoHome size={20} />Admin Home</NavLink></li>
+                                        <li><NavLink to="/dashboard/addItems"><GiForkKnifeSpoon size={20} />Add Items</NavLink></li>
+                                        <li><NavLink to="/dashboard/manageItems"><FaList size={20} />Manage Items</NavLink></li>
+                                        <li><NavLink to="/dashboard/manageBookings"><FaBook size={20} />Manage Bookings</NavLink></li>
+                                        <li><NavLink to="/dashboard/allUsers"><HiUserGroup size={20} />All users</NavLink></li>
+                                    </> :
+
+                                    //Regular user content
+                                    <>
+                                        <li><NavLink to="/dashboard/userHome"><IoHome size={20} />User Home</NavLink></li>
+                                        <li><NavLink to="/dashboard/reservation"><FaCalendarAlt size={20} />Reservation</NavLink></li>
+                                        <li><NavLink to="/dashboard/reservation"><IoIosWallet size={20} />Payment History</NavLink></li>
+                                        <li><NavLink to="/dashboard/cart"><FaShoppingCart size={20} />My Cart</NavLink></li>
+                                        <li><NavLink to="/dashboard/reservation"><FaStarHalfStroke size={20} />Add Review</NavLink></li>
+                                        <li><NavLink to="/dashboard/reservation"><FaCalendarCheck size={20} />My Booking</NavLink></li>
+                                    </>
+                            }
+
+                            {/* Common content */}
+                            <hr className="my-5 border-gray-400" />
+                            <li><NavLink to="/"><IoHome size={20} />Home</NavLink></li>
+                            <li><NavLink to="/ourMenu"><IoMenu size={20} />Menu</NavLink></li>
+                            <li><NavLink to="/ourShop/0"><MdShoppingBag size={20} />Shop</NavLink></li>
+                            <li><NavLink to="/dashboard/reservation"><MdEmail size={20} />Contact</NavLink></li>
                         </ul>
 
                     </div>
