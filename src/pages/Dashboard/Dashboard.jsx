@@ -11,16 +11,13 @@ import { MdEmail } from "react-icons/md";
 import { GiForkKnifeSpoon } from "react-icons/gi";
 import { HiUserGroup } from "react-icons/hi2";
 import '../Dashboard/dashboard.css'
+import { Toaster } from 'react-hot-toast';
 import useAdmin from "../../hooks/useAdmin";
-import useAuth from "../../hooks/useAuth";
 
 const Dashboard = () => {
 
-    const {loading} = useAuth()
-    const {isAdmin,isPending} = useAdmin();
-    if( loading){
-        return 'loading'
-    }
+    const {isAdmin} = useAdmin();
+
     return (
         <div className="lg:flex ">
             <div>
@@ -46,7 +43,7 @@ const Dashboard = () => {
                                 // Admin content
                                     <>
                                         <li><NavLink to="/dashboard/adminHome"><IoHome size={20} />Admin Home</NavLink></li>
-                                        <li><NavLink to="/dashboard/addItems"><GiForkKnifeSpoon size={20} />Add Items</NavLink></li>
+                                        <li><NavLink to="/dashboard/addItem"><GiForkKnifeSpoon size={20} />Add Items</NavLink></li>
                                         <li><NavLink to="/dashboard/manageItems"><FaList size={20} />Manage Items</NavLink></li>
                                         <li><NavLink to="/dashboard/manageBookings"><FaBook size={20} />Manage Bookings</NavLink></li>
                                         <li><NavLink to="/dashboard/allUsers"><HiUserGroup size={20} />All users</NavLink></li>
@@ -77,6 +74,7 @@ const Dashboard = () => {
             <div className="p-5 flex-1 bg-[#f6f6f6]">
                 <Outlet />
             </div>
+            <Toaster/>
         </div>
     );
 };

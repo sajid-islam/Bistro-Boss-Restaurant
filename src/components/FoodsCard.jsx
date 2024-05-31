@@ -55,7 +55,7 @@ const FoodsCard = ({ items }) => {
             {
                 items.map(item =>
                     <div key={item._id} className="card  bg-[#F3F3F3]  rounded-none ">
-                        <figure><img src={item.image} alt={item.name} className='w-full' /></figure>
+                        <figure><img src={item.image} alt={item.name} className='w-full md:h-[310px]' /></figure>
                         <div className="card-body text-center">
                             <h2 className="text-2xl font-semibold">{item.name}</h2>
                             <p className='text-[#737373]'>{item.recipe}</p>
