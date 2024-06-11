@@ -9,19 +9,7 @@ const axiosSecure = axios.create({
 })
 
 const useAxiosSecure = () => {
-    const { logout } = useAuth()
-    const navigate = useNavigate()
-    useEffect(() => {
-        axiosSecure.interceptors.response.use((res) => {
-            return res;
-        }, async (error) => {
-            const status = error.response.status
-            if (status === 401 || status === 403) {
-                await logout()
-                navigate('/login')
-            }
-        })
-    }, [logout,navigate])
+
 
     return axiosSecure;
 };

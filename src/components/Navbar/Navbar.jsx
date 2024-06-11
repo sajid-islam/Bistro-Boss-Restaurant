@@ -4,14 +4,22 @@ import { toast } from 'react-hot-toast';
 import { TiShoppingCart } from "react-icons/ti";
 import useItemCart from "../../hooks/useItemCart";
 import './navbar.css'
+import useAdmin from "../../hooks/useAdmin";
 
 const Navbar = () => {
     const { user, logout } = useAuth()
+    const { isAdmin } = useAdmin()
     const { cartItem } = useItemCart()
     const navLink = <>
         <li><NavLink className="nav-link" to={'/'}>Home</NavLink></li>
         <li><NavLink className="nav-link" to={'/contact-us'}>Contact Us</NavLink></li>
-        <li><NavLink className="nav-link" to={'/dashboard'}>Dashboard</NavLink></li>
+        {
+            user && isAdmin && <li><NavLink className="nav-link" to={'/dashboard/adminHome'}>Dashboard</NavLink></li>
+        }
+        {
+            user && !isAdmin && <li><NavLink className="nav-link" to={'/dashboard/userHome'}>Dashboard</NavLink></li>
+
+        }
         <li><NavLink className="nav-link" to={'/ourMenu'}>Our Menu</NavLink></li>
         <li><NavLink className="nav-link" to={'/ourShop/0'}>Our Shop</NavLink></li>
         <li><NavLink className="nav-link" to={'/dashboard/cart'}>

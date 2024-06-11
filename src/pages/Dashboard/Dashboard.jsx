@@ -52,8 +52,8 @@ const Dashboard = () => {
                                     //Regular user content
                                     <>
                                         <li><NavLink to="/dashboard/userHome"><IoHome size={20} />User Home</NavLink></li>
-                                        <li><NavLink to="/dashboard/reservation"><FaCalendarAlt size={20} />Reservation</NavLink></li>
-                                        <li><NavLink to="/dashboard/reservation"><IoIosWallet size={20} />Payment History</NavLink></li>
+                                        <li><NavLink to="/dashboard/payment"><FaCalendarAlt size={20} />Reservation</NavLink></li>
+                                        <li><NavLink to="/dashboard/paymentHistory"><IoIosWallet size={20} />Payment History</NavLink></li>
                                         <li><NavLink to="/dashboard/cart"><FaShoppingCart size={20} />My Cart</NavLink></li>
                                         <li><NavLink to="/dashboard/reservation"><FaStarHalfStroke size={20} />Add Review</NavLink></li>
                                         <li><NavLink to="/dashboard/reservation"><FaCalendarCheck size={20} />My Booking</NavLink></li>

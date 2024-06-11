@@ -3,6 +3,7 @@ import SectionTitle from "../../components/SectionTitle/SectionTitle";
 import useItemCart from "../../hooks/useItemCart";
 import { MdDeleteOutline } from "react-icons/md";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
     const { cartItem, refetch } = useItemCart()
@@ -40,8 +41,14 @@ const Cart = () => {
             <div className="bg-white md:p-5 lg:mx-10">
                 <div className="font-cinzel flex justify-between">
                     <h3 className="lg:text-3xl font-bold">Total Order: {cartItem?.length}</h3>
-                    <h3 className="lg:text-3xl font-bold">Total Price: {totalPrice}</h3>
-                    <button className="btn bg-[#D1A054] text-white">Pay</button>
+                    {
+                        cartItem.length ?
+                            <>
+                                <h3 className="lg:text-3xl font-bold">Total Price: {totalPrice}</h3>
+                                <Link to="/dashboard/payment" className="btn bg-[#D1A054] text-white">Pay</Link>
+                            </> :
+                            ""
+                    }
                 </div>
                 <div>
                     <div className="overflow-x-auto mt-6 rounded-t-2xl">

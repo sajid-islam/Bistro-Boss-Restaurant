@@ -8,7 +8,7 @@ const useItemCart = () => {
     const axiosSecure = useAxiosSecure()
 
     //Get Cart from database
-    const { data: cartItem = [], refetch } = useQuery({
+    const { data: cartItem = [], refetch,isPending } = useQuery({
         queryKey: ['cart', user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get(`/cart?email=${user?.email}`)
@@ -17,7 +17,7 @@ const useItemCart = () => {
         }
     })
 
-    return { cartItem, refetch }
+    return { cartItem, refetch,isPending }
 };
 
 export default useItemCart;
