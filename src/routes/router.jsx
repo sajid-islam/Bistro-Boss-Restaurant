@@ -18,6 +18,7 @@ import PaymentHistory from "../pages/Dashboard/PaymentHistory";
 import UserHome from "../pages/Dashboard/UserHome";
 import AdminHome from "../pages/Dashboard/AdminHome";
 import NotFound from "./../pages/NotFound";
+import Contact from "../pages/Contact";
 
 const router = createBrowserRouter([
     {
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
             {
                 path: "/register",
                 element: <Register />,
+            },
+            {
+                path: "/contact-us",
+                element: <Contact />,
             },
         ],
     },
