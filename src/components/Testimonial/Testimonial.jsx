@@ -44,28 +44,32 @@ const Testimonial = () => {
                     }}
                     className="mySwiper"
                 >
-                    {reviews.map((review) => (
-                        <SwiperSlide key={review._id}>
-                            <div className="flex flex-col text-center space-y-3 items-center py-5">
-                                <div>
-                                    <Rating
-                                        style={{ maxWidth: 180 }}
-                                        value={3}
-                                        readOnly
-                                    />
+                    {!reviews ? (
+                        <></>
+                    ) : (
+                        reviews.map((review) => (
+                            <SwiperSlide key={review._id}>
+                                <div className="flex flex-col text-center space-y-3 items-center py-5">
+                                    <div>
+                                        <Rating
+                                            style={{ maxWidth: 180 }}
+                                            value={3}
+                                            readOnly
+                                        />
+                                    </div>
+                                    <div>
+                                        <FaQuoteLeft size={60} />
+                                    </div>
+                                    <p className="text-[#444444]">
+                                        {review.details}
+                                    </p>
+                                    <h3 className="text-2xl text-[#CD9003] uppercase">
+                                        {review.name}
+                                    </h3>
                                 </div>
-                                <div>
-                                    <FaQuoteLeft size={60} />
-                                </div>
-                                <p className="text-[#444444]">
-                                    {review.details}
-                                </p>
-                                <h3 className="text-2xl text-[#CD9003] uppercase">
-                                    {review.name}
-                                </h3>
-                            </div>
-                        </SwiperSlide>
-                    ))}
+                            </SwiperSlide>
+                        ))
+                    )}
                 </Swiper>
             </div>
         </section>
